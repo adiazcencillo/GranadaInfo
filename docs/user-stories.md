@@ -6,7 +6,7 @@ Anna va a visitar Granada y quiere planificar su viaje. Para ello necesita conta
 
 ## [[HU2]Javier, guía turístico](https://github.com/adiazcencillo/GranadaInfo/issues/3)
 
-Javier es guía turístico en Granda. Javier planifica su oferta de visitas a una semana vista, por lo que para él es fundamental conocer de primera mano cualquier actualización en el horario de visita o los días de cierre de los monumentos que él cubre. Para él es un incordio tener que revisar página por página los horarios de los monumentos, pues cualquier cambio en el horario puede ser fatal para su organización. Para Javier sería de gran ayuda contar con información actualizada semanalmente de los horarios y días de apertura de los monumentos de Granada.
+Javier es guía turístico en Granada. Javier planifica su oferta de visitas a una semana vista, por lo que para él es fundamental conocer de primera mano cualquier actualización en el horario de visita o los días de cierre de los monumentos que él cubre. Para él es un incordio tener que revisar página por página los horarios de los monumentos, pues cualquier cambio en el horario puede ser fatal para su organización. Para Javier sería de gran ayuda contar con información actualizada semanalmente de los horarios y días de apertura de los monumentos de Granada.
 
 ## [[HU3]Elena, residente en Granada](https://github.com/adiazcencillo/GranadaInfo/issues/4)
 
