@@ -2,7 +2,7 @@
 
 [[M0] Estructura del problema](https://github.com/adiazcencillo/GranadaInfo/milestone/1)
 
-- **Descripción del producto:** Definir la estructura del proyecto a partir de los problemas recogidos en las HUs asociadas, de forma que se pueda extraer y operar la información requerida. Para ello será necesario definir previamente las herramientas y recursos que se van a usar para resolver estos problemas: qué monumentos vamos a incluir, de qué páginas web queremos extraer la información, qué herramientas vamos a usar para ello y dónde vamos a almacenar los datos obtenidos.
+- **Descripción del producto:** Definir la estructura del proyecto a partir del problema recogido en [HU1](https://github.com/adiazcencillo/GranadaInfo/issues/2), de forma que se pueda extraer y operar la información requerida. Para ello será necesario definir previamente las herramientas y recursos que se van a usar para resolver estos problemas: qué monumentos vamos a incluir, de qué páginas web queremos extraer la información, qué herramientas vamos a usar para ello y dónde vamos a almacenar los datos obtenidos.
 - **Entregable:** Código que represente la estructura básica del proyecto. 
 - **Viabilidad:** Se considerará viable cuando los recursos y herramientas propuestos sean considerados aptos para continuar con el desarrollo del proyecto a ojos del revisor.
 
