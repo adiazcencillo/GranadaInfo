@@ -12,7 +12,7 @@
 
 [[M1] Obtención de horarios de los distintos monumentos](https://github.com/adiazcencillo/GranadaInfo/milestone/2)
 
-- **Objetivo:** Extraer los horarios de los distintos monumentos, desde las páginas establecidas y con las herramientas definidas, y almacenar esta información en el formato elegido.
+- **Objetivo:** Extraer los horarios de los distintos monumentos, desde las páginas establecidas y con las herramientas definidas, almacenar esta información en el formato elegido, y visualizarla.
 - **Entregable** Código necesario para realizar esta funcionalidad.
 - **Viabilidad:** Cuando se superen de forma positiva un conjunto de tests que tendrán como objetivo comprobar el correcto almacenamiento de la información extraída.
 
