@@ -1,4 +1,3 @@
-// main.go
 package main
 
 import "fmt"
@@ -41,17 +40,26 @@ func NuevoHorario(horariosApertura map[string]string, diasCerrado [7]bool) Horar
 type Monumento struct {
     Nombre         string
     Ubicacion      Ubicacion
-    HorarioVerano  Horario
-    HorarioInvierno Horario
+    HorarioVerano  *Horario
+    HorarioInvierno *Horario
+    SiempreAbierto bool
 }
 
 // Función para inicializar una instancia de Monumento
-func NuevoMonumento(nombre string, ubicacion Ubicacion, horarioVerano, horarioInvierno Horario) Monumento {
+func NuevoMonumento(nombre string, ubicacion Ubicacion, horarioVerano, horarioInvierno *Horario, siempreAbierto bool) Monumento {
+    if siempreAbierto {
+        return Monumento{
+            Nombre:         nombre,
+            Ubicacion:      ubicacion,
+            SiempreAbierto: siempreAbierto,
+        }
+    }
     return Monumento{
         Nombre:         nombre,
         Ubicacion:      ubicacion,
         HorarioVerano:  horarioVerano,
         HorarioInvierno: horarioInvierno,
+        SiempreAbierto: siempreAbierto,
     }
 }
 
@@ -60,6 +68,12 @@ func (m Monumento) MostrarInfo() {
     fmt.Printf("Nombre: %s\nUbicación: %s, %s, %s, %s, %s\n",
         m.Nombre, m.Ubicacion.Calle, m.Ubicacion.Numero, m.Ubicacion.Ciudad,
         m.Ubicacion.Provincia, m.Ubicacion.Pais)
+    
+    if m.SiempreAbierto {
+        fmt.Println("Este monumento está siempre abierto.")
+        return
+    }
+
     fmt.Printf("Horario de Verano:\n")
     for dia, horario := range m.HorarioVerano.HorariosApertura {
         fmt.Printf("  %s: %s\n", dia, horario)
@@ -87,7 +101,6 @@ func (m Monumento) MostrarInfo() {
     }
 }
 
-// Ejemplo de funcionamiento
 func main() {
     // Crear una instancia de Ubicacion
     ubicacionAlhambra := NuevaUbicacion("Calle Real de la Alhambra", "s/n")
@@ -119,7 +132,7 @@ func main() {
     horarioInvierno := NuevoHorario(horariosAperturaInvierno, diasCerradoInvierno)
 
     // Crear una instancia de Monumento
-    alhambra := NuevoMonumento("La Alhambra", ubicacionAlhambra, horarioVerano, horarioInvierno)
+    alhambra := NuevoMonumento("La Alhambra", ubicacionAlhambra, &horarioVerano, &horarioInvierno, false)
 
     // Mostrar la información del monumento
     alhambra.MostrarInfo()
