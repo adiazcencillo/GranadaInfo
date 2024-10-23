@@ -3,6 +3,9 @@ package monumento
 import "fmt"
 
 // Monumento representa un monumento con su información básica.
+// Monumento tiene un conjunto de atributos que describen el monumento, es decir, tiene una identidad inmutable, siendo monumento una entidad.
+// Por ejemplo, tiene Nombre como propiedad clave que garantiza su unicidad, considerandose entidad.
+// Monumento también es un agregado de Ubicación y Horario, que son objetos valor.
 type Monumento struct {
     Nombre          string  // Nombre del monumento
     Ubicacion       Ubicacion  // Ubicación del monumento

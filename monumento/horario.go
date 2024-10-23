@@ -6,6 +6,7 @@ import (
 )
 
 // Horario representa los horarios de apertura y cierre de un monumento.
+// Es un objeto valor ya que su identidad depende de sus atributos, no tiene identidad propia.
 type Horario struct {
     DiasCerrado     []bool              // Indica qué días está cerrado el monumento. Incluye los festivos así como un día extra para festivos.
     HorariosApertura map[string][]string // Horarios de apertura por día de la semana. Permite varios horarios por día para el caso de cierre al mediodía.
