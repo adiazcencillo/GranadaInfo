@@ -1,1 +1,4 @@
 lenguaje: Go
+
+entidad: pkg\horario\horario.go
+objeto_valor: pkg\horario\horario.go
