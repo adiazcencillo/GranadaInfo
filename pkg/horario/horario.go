@@ -1,31 +1,33 @@
 package horario
 
-import (
-    "fmt"
-    "strings"
-)
-
 // Horario representa los horarios de apertura y cierre de un monumento.
-// Es un objeto valor ya que su identidad depende de sus atributos, no tiene identidad propia.
+// Es un objeto valor, ya que su identidad depende de sus atributos.
 type Horario struct {
-    DiasCerrado     []bool              // Indica qué días está cerrado el monumento. Incluye los festivos así como un día extra para festivos.
-    HorariosApertura map[string][]string // Horarios de apertura por día de la semana. Permite varios horarios por día para el caso de cierre al mediodía.
+    DiasCerrado     []bool              // Indica si el monumento está cerrado en cada día de la semana y festivos.
+    HorariosApertura map[string][]string // Horarios de apertura por día de la semana. Permite múltiples horarios por día.
+    SiempreAbierto   bool                // Indica si el monumento está siempre abierto.
 }
 
-// MostrarHorario imprime el horario del monumento para un nombre de horario específico para diferenciar entre verano e invierno.
-func (h Horario) MostrarHorario(nombreHorario string) {
-    fmt.Printf("Horario de %s:\n", nombreHorario)
-    diasSemana := []string{"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo", "Festivo"}
-
-    // Itera sobre los días de la semana y muestra si está abierto o cerrado, y los horarios de apertura (sólo si esta abierto).
-    for i, dia := range diasSemana {
-        estado := "Abierto"
-        if h.DiasCerrado[i] {
-            estado = "Cerrado"
-            fmt.Printf("  %s: %s\n", dia, estado)
-        } else {
-            horarios := h.HorariosApertura[dia]
-            fmt.Printf("  %s: %s - %s\n", dia, estado, strings.Join(horarios, ", "))
+// NuevoHorario crea una nueva instancia de Horario.
+// Si siempreAbierto es verdadero, se ignoran diasCerrado y horariosApertura,
+// y se establecen valores por defecto para una apertura continua.
+func NuevoHorario(siempreAbierto bool, diasCerrado []bool, horariosApertura map[string][]string) *Horario {
+    if siempreAbierto {
+        horariosApertura = map[string][]string{
+            "Lunes":    {"00:00-23:59"},
+            "Martes":   {"00:00-23:59"},
+            "Miércoles": {"00:00-23:59"},
+            "Jueves":   {"00:00-23:59"},
+            "Viernes":  {"00:00-23:59"},
+            "Sábado":   {"00:00-23:59"},
+            "Domingo":  {"00:00-23:59"},
+            "Festivo":  {"00:00-23:59"},
         }
+        diasCerrado = []bool{false, false, false, false, false, false, false, false}
+    }
+    return &Horario{
+        DiasCerrado:     diasCerrado,
+        HorariosApertura: horariosApertura,
+        SiempreAbierto:  siempreAbierto,
     }
 }
