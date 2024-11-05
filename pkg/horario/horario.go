@@ -1,7 +1,5 @@
 package horario
 
-// Horario representa los horarios de apertura y cierre de un monumento.
-// Es un objeto valor, ya que su identidad depende de sus atributos.
 type Horario struct {
     DiasCerrado     []bool              // Indica si el monumento está cerrado en cada día de la semana y festivos.
     HorariosApertura map[string][]string // Horarios de apertura por día de la semana. Permite múltiples horarios por día.
