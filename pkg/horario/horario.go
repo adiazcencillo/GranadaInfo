@@ -3,7 +3,7 @@ package horario
 type Horario struct {
     DiasCerrado     []bool              // Indica si el monumento está cerrado en cada día de la semana y festivos.
     HorariosApertura map[string][]string // Horarios de apertura por día de la semana. Permite múltiples horarios por día.
-    SiempreAbierto   bool                // Indica si el monumento está siempre abierto.
+    SiempreAbierto   bool
 }
 
 // NuevoHorario crea una nueva instancia de Horario.
