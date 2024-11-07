@@ -6,7 +6,7 @@ type Horario struct {
     SiempreAbierto   bool
 }
 
-func NuevoHorario(siempreAbierto bool, diasCerrado []bool, horariosApertura map[ClaveHorario][]string) (*Horario, error) {
+func NuevoHorario(siempreAbierto bool, diasCerrado []bool, horariosApertura map[ClaveHorario][]string) *Horario {
     if siempreAbierto {
         horariosApertura = map[ClaveHorario][]string{
             Lunes:     {"00:00-23:59"},
@@ -24,5 +24,5 @@ func NuevoHorario(siempreAbierto bool, diasCerrado []bool, horariosApertura map[
         DiasCerrado:      diasCerrado,
         HorariosApertura: horariosApertura,
         SiempreAbierto:   siempreAbierto,
-    }, nil
+    }
 }
