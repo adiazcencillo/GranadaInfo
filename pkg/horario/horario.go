@@ -1,10 +1,5 @@
 package horario
 
-import (
-    "fmt"
-    "errors"
-)
-
 type Horario struct {
     DiasCerrado     []bool
     HorariosApertura map[ClaveHorario][]string
@@ -24,13 +19,7 @@ func NuevoHorario(siempreAbierto bool, diasCerrado []bool, horariosApertura map[
             Festivo:   {"00:00-23:59"},
         }
         diasCerrado = []bool{false, false, false, false, false, false, false, false}
-    } else {
-        for clave := range horariosApertura {
-            if !ClavesValidas[clave] {
-                return nil, errors.New(fmt.Sprintf("Clave inválida: %s", clave))
-            }
-        }
-    }
+    } 
     return &Horario{
         DiasCerrado:      diasCerrado,
         HorariosApertura: horariosApertura,

@@ -12,14 +12,3 @@ const (
     Domingo   ClaveHorario = "Domingo"
     Festivo   ClaveHorario = "Festivo"
 )
-
-var ClavesValidas = map[ClaveHorario]bool{
-    Lunes:     true,
-    Martes:    true,
-    Miércoles: true,
-    Jueves:    true,
-    Viernes:   true,
-    Sábado:    true,
-    Domingo:   true,
-    Festivo:   true,
-}
