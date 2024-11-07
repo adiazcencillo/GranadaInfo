@@ -5,9 +5,9 @@ type Monumento struct {
 	Horario        Horario
 }
 
-func NuevoMonumento(nombre string, horario Horario) Monumento {
-	return Monumento{
-		Nombre:         nombre,
-		Horario:       horario,
+func NuevoMonumento(nombre string, horario Horario) *Monumento {
+	return &Monumento{
+		Nombre:  nombre,
+		Horario: horario,
 	}
 }
