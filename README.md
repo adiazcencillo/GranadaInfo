@@ -20,7 +20,7 @@ Como gestor de dependencias se ha optado por usar `Go modules`, el estándar rec
 
 ## Comprobación de Sintaxis: orden check
 
-Si queremos comprobar la sintaxis del código desarrollado hasta el momento basta con ejecutar el comando `task check`.
+Si queremos comprobar la sintaxis del código desarrollado hasta el momento basta con ejecutar el comando task check.
 
 ## Documentos
 
