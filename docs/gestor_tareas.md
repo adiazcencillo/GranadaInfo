@@ -7,31 +7,38 @@ Para este proyecto, se han identificado las siguientes características clave qu
 ### 1. **Soporte y Mantenimiento Activo**
    Es fundamental contar con una herramienta respaldada por soporte oficial o una comunidad activa para garantizar su evolución y resolución de problemas. Un gestor sin soporte podría quedar obsoleto, lo que obligaría a realizar un cambio costoso y generaría deuda técnica en el futuro.
 
-### 2. **Legibilidad de la Sintaxis**
-   La legibilidad de la sintaxis facilita la comprensión y el mantenimiento del proyecto. Una sintaxis clara y concisa permite realizar ajustes más rápidos y con menos riesgo de error, además de hacer más sencillo el proceso de depuración y la incorporación de nuevas tareas a medida que el proyecto crece en complejidad.
-
-### 3. **Simplicidad en la Configuración**
-   La simplicidad en la configuración es clave para una implementación rápida y sin fricciones. Un gestor que requiera configuraciones mínimas y sencillas permite iniciar el proyecto de manera ágil, sin perder tiempo en detalles técnicos complejos, lo que favorece la eficiencia en el desarrollo.
-
-### 4. **Integración en el Sistema**
-   Un buen gestor de tareas debe integrarse bien con las herramientas y tecnologías ya utilizadas en el proyecto. Esto facilita la automatización de procesos y evita configuraciones adicionales.
+### 2. **Ecosistema Go**
+   Es clave elegir una herramienta que se integre de manera eficiente con el ecosistema Go, minimizando las dependencias externas. Esto garantiza que el proyecto sea fácil de portar y mantener, evitando complicaciones derivadas de la necesidad de otros lenguajes o plataformas. Además, al reducir las dependencias externas, se disminuye la superficie de ataque, lo que puede mejorar la seguridad del proyecto al evitar vulnerabilidades asociadas con herramientas o bibliotecas de otros lenguajes.
 
 
 ## Elección Basada en los Criterios Objetivos
 
-Teniendo en cuentas estos criterios, se ha optado por `Task` como gestor de tareas para este proyecto. A continuación, se justifican los motivos que han llevado a esta decisión:
+### 1. Soporte y Mantenimiento Activo
+   `Task`, `Bazel`, `Just` y `Ninja` cuentan con una comunidad activa y actualizaciones regulares, lo que garantiza su mantenimiento a largo plazo y la resolución de problemas de manera eficiente. Otras herramientas como `Rake` reciben soporte en la actualidad pero no poseen una comunidad tan activa. Otras como `Make`, `Mage` y `Realize` llevan desde el año pasado sin registrar actividad. Esto puede suponer un problema a largo plazo a nivel de deuda técnica. 
 
-### 1. **Soporte y Mantenimiento Activo**
-   `Task` cuenta con una comunidad activa y actualizaciones regulares, lo que garantiza su mantenimiento a largo plazo y la resolución de problemas de manera eficiente. Además, su uso creciente y la participación de la comunidad aseguran que el proyecto continuará recibiendo mantenimiento y nuevas características en el futuro. Otras herramientas como `Mage` están recibiendo menos mantenimiento en la actualidad.
+### 2. Ecosistema Go
+- `Task`, `Mage` y `Realize` están escritas en `Go`, lo que las convierte en opciones atractivas para proyectos `Go`. Ambas herramientas se integran bien en el ecosistema y aprovechan sus características.
+  - `Mage` utiliza sintaxis Go para definir las tareas, lo que permite escribir las tareas en el mismo lenguaje que el proyecto, manteniendo coherencia y facilitando el aprovechamiento de características de `Go`. 
 
-### 2. **Legibilidad de la Sintaxis**
-   La sintaxis de Task es sencilla y fácil de leer, lo que facilita la comprensión de las tareas definidas. Al utilizar un formato `YAML` limpio y bien estructurado, las tareas son claras y comprensibles, lo que mejora la productividad al reducir la posibilidad de errores y facilita la incorporación de nuevas tareas conforme el proyecto se expande. Herramientas como `Make` poseen una sintaxis poco intuitiva.
+  - `Task`, por otro lado, utiliza YAML para definir las tareas, lo que proporciona una configuración más declarativa y legible, aunque requiere conocer el formato YAML.
 
-### 3. **Simplicidad en la Configuración**
-   Task se destaca por su enfoque en la simplicidad, permitiendo a los desarrolladores definir y ejecutar tareas sin necesidad de configuraciones complicadas. Con un archivo `Taskfile.yaml` de configuración mínimo, es posible comenzar a trabajar rápidamente, sin necesidad de aprender detalles técnicos avanzados.
+  - `Realize` se vende como el #1 task runner en `Go`. Al igual que `Task`, utiliza sintaxis `YAML` para definir sus tareas.
 
-### 4. **Integración en el Sistema**
-Su capacidad para interactuar con el entorno `Go` y otras herramientas del sistema facilita la automatización de procesos y la gestión de tareas de manera fluida y eficiente.
+En cuanto a las demás herramientas:
+
+- `Rake` está escrita en Ruby, lo que significa que se necesita tener Ruby instalado y gestionar dependencias mediante `gems` para ejecutar tareas en proyectos Go. Esto puede añadir una capa adicional de complejidad y dependencias fuera del ecosistema Go.
+  
+- `Just`, `Bazel`, `Make` y `Ninja` están escritos en lenguajes distintos a Go. Sin embargo, todas requieren solo la instalación de la herramienta en el sistema, sin necesidad de añadir dependencias adicionales en el proyecto `Go` mismo.
+
+Una vez descritos los criterios y como se adaptan las distintas herramientas consideradas, obtenemos las siguientes conclusiones:
+
+- `Mage` y `Realize` son gestores interesantes al estar escritos en `Go` y utilizar una sintaxis sencilla. Sin embargo, la falta de actividad en ambos casos puede suponer un problema de deuda técnica futura, por lo que decidimos descartarlos.
+
+- `Make` y `Ninja` son herramientas potentes que no requieren de dependencias externas y cuya comunidad es activa (más en `Ninja` que en `Make`). Sin embargo, la sintaxis que estas herramientas utilizan me hace descartarlas, ya que la curva de aprendizaje puede ser más pronunciada al principio.
+
+- `Rake` requiere dependencias externas y su uso se recomienda en proyectos de `Ruby`, por lo que también la descartamos como opción.
+
+- Por último, `Bazel`, `Just` y `Task` son herramientas que cumplen los requisitos impuestos anteriormente. Sin embargo, decido decantarme por `Task` ya que la sintaxis `YAML` me resulta atractiva, y el estar escrito en `Go` aporta coherencia al proyecto.
 
 
 
