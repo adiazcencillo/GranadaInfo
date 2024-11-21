@@ -1,3 +1,7 @@
 lenguaje: Go
 
 entidad: pkg/horario/monumento.go
+
+automatizar:
+  fichero: Taskfile.yaml
+  orden: task

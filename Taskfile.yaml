@@ -1,0 +1,14 @@
+version: '3'
+
+tasks: 
+  check: 
+    desc: "Comprobación de sintaxis del código"
+    cmds: 
+      - "gofmt -e ./pkg/horario > /dev/null"
+
+
+  build:
+    desc: "Compilación y generación de binario"
+    cmds:
+      - "go build ./pkg/horario"
+
