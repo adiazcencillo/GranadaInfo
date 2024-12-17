@@ -30,7 +30,7 @@ func extraerNodosH3(doc *html.Node) ([]*html.Node, error) {
 
 	var recorrerNodos func(*html.Node)
 	recorrerNodos = func(n *html.Node) {
-		
+
 		if n.Type == html.ElementNode && n.Data == "h3" {
 			for _, a := range n.Attr {
 				if a.Key == "id" && a.Val == "nombre-monumento" {
@@ -48,3 +48,28 @@ func extraerNodosH3(doc *html.Node) ([]*html.Node, error) {
 
 	return nodosH3, nil
 }
+
+func extraerNodosHorarios(doc *html.Node) ([]*html.Node, error) {
+	var nodosH3 []*html.Node
+
+	var recorrerNodos func(*html.Node)
+	recorrerNodos = func(n *html.Node) {
+		
+		if n.Type == html.ElementNode && n.Data == "p" {
+			for _, a := range n.Attr {
+				if a.Key == "id" && a.Val == "horario" {
+					nodosH3 = append(nodosH3, n)
+				}
+			}
+		}
+
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			recorrerNodos(c)
+		}
+	}
+
+	recorrerNodos(doc)
+
+	return nodosH3, nil
+}
+
