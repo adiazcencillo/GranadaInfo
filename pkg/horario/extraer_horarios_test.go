@@ -8,11 +8,10 @@ import(
 	"github.com/onsi/gomega"
 )
 
-func TestCargarDocumento(t *testing.T) {
+func TestCargarDocumento(t *testing.T, filePath string) {
 	g := gomega.NewWithT(t)
 
 	t.Run("Cargar documento HTML correctamente", func(t *testing.T) {
-		filePath := "~/horarios.html"
 
 		doc, err := cargarDocumento(filePath)
 
@@ -20,3 +19,4 @@ func TestCargarDocumento(t *testing.T) {
 		g.Expect(doc).NotTo(gomega.BeNil())         
 	})
 }
+
