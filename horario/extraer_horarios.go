@@ -73,3 +73,14 @@ func extraerNodosHorarios(doc *html.Node) ([]*html.Node, error) {
 	return nodosH3, nil
 }
 
+func extraerStringNodo(n *html.Node) string {
+	var texto string
+	if n.Type == html.TextNode {
+		texto = n.Data
+	}
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		texto += extraerStringNodo(c)
+	}
+	return texto
+}
+
