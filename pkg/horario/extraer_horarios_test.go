@@ -20,6 +20,16 @@ func TestCargarDocumento(t *testing.T) {
 		g.Expect(err).NotTo(gomega.HaveOccurred()) 
 		g.Expect(doc).NotTo(gomega.BeNil())         
 	})
+
+	t.Run("Archivo no encontrado", func(t *testing.T) {
+
+		filePath := "noexiste.html"
+
+		doc, err := cargarDocumento(filePath)
+		
+		g.Expect(err).To(gomega.HaveOccurred())
+		g.Expect(doc).To(gomega.BeNil())
+	})
 }
 
 func TestExtraerNodosH3(t *testing.T) {
