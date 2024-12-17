@@ -30,11 +30,12 @@ func extraerNodosH3(doc *html.Node) ([]*html.Node, error) {
 
 	var recorrerNodos func(*html.Node)
 	recorrerNodos = func(n *html.Node) {
+		
 		if n.Type == html.ElementNode && n.Data == "h3" {
-			texto := extraerStringNodo(n)
-
-			if texto != "MONUMENTOS DE GRANADA" {
-				nodosH3 = append(nodosH3, n)
+			for _, a := range n.Attr {
+				if a.Key == "id" && a.Val == "nombre-monumento" {
+					nodosH3 = append(nodosH3, n)
+				}
 			}
 		}
 
