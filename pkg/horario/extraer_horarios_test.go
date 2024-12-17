@@ -85,6 +85,54 @@ func TestExtraerStringNodo(t *testing.T) {
 		g.Expect(err).To(gomega.HaveOccurred()) 
 		g.Expect(texto).To(gomega.BeEmpty())  
 	})
+
+}
+
+func TestExtraerHorario(t *testing.T) {
+	g := gomega.NewWithT(t)
+
+	string stringHorario = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes - viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
+
+	horario, err := extraerHorario(stringHorario)
+	g.Expect(err).NotTo(gomega.HaveOccurred())
+	g.Expect(horario).NotTo(gomega.BeNil())
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Lunes")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Lunes")]).To(gomega.Equal([]string{
+		"10:00 - 14:00", "16:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Martes")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Martes")]).To(gomega.Equal([]string{
+		"10:00 - 14:00", "16:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Miércoles")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Miércoles")]).To(gomega.Equal([]string{
+		"10:00 - 14:00", "16:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Jueves")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Jueves")]).To(gomega.Equal([]string{
+		"10:00 - 14:00", "16:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Viernes")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Viernes")]).To(gomega.Equal([]string{
+		"10:00 - 14:00", "16:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Sábado")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Sábado")]).To(gomega.Equal([]string{
+		"10:00 - 18:00",
+	}))
+
+	g.Expect(horario.HorariosApertura).To(gomega.HaveKey(ClaveHorario("Domingo")))
+	g.Expect(horario.HorariosApertura[ClaveHorario("Domingo")]).To(gomega.Equal([]string{
+		"10:00 - 18:00",
+	}))
+
+	g.Expect(horario.DiasCerrado).To(gomega.Equal([]bool{false, false, false, false, false, false, false}))
 }
 
 
