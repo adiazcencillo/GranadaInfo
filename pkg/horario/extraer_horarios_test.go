@@ -26,7 +26,7 @@ func TestCargarDocumento(t *testing.T) {
 		filePath := "noexiste.html"
 
 		doc, err := cargarDocumento(filePath)
-		
+
 		g.Expect(err).To(gomega.HaveOccurred())
 		g.Expect(doc).To(gomega.BeNil())
 	})
@@ -67,13 +67,24 @@ func TestExtraerStringNodo(t *testing.T) {
 	nodosH3 := extraerNodosH3(doc)
 	nodosHorario := extraerNodosHorario(doc)
 
-	texto, err := extraerStringNodo(nodosH3[0])
-	g.Expect(err).NotTo(gomega.HaveOccurred())
-	g.Expect(texto).To(gomega.Equal("Alhambra"))
+	t.Run("Extraer texto del primer nodo <h3>", func(t *testing.T) {
+		texto, err := extraerStringNodo(nodosH3[0])
+		g.Expect(err).NotTo(gomega.HaveOccurred())
+		g.Expect(texto).To(gomega.Equal("Alhambra"))
+	})
 
-	texto, err := extraerStringNodo(nodosHorario[0])
-	g.Expect(err).NotTo(gomega.HaveOccurred())
-	g.Expect(texto).To(gomega.Equal("08:30 - 18:00, 19:00 - 20:45 (invierno); 08:30 - 20:00, 22:00 - 23:30 (verano)"))
+	t.Run("Extraer texto del primer nodo de horarios", func(t *testing.T) {
+		texto, err := extraerStringNodo(nodosHorario[0])
+		g.Expect(err).NotTo(gomega.HaveOccurred()) 
+		g.Expect(texto).To(gomega.Equal("08:30 - 18:00, 19:00 - 20:45 (invierno); 08:30 - 20:00, 22:00 - 23:30 (verano)"))
+	})
 
+	t.Run("Extraer texto de un nodo vacío", func(t *testing.T) {
+		nodoVacio := &html.Node{} // Crear un nodo vacío
+		texto, err := extraerStringNodo(nodoVacio)
+		g.Expect(err).To(gomega.HaveOccurred()) 
+		g.Expect(texto).To(gomega.BeEmpty())  
+	})
 }
+
 
