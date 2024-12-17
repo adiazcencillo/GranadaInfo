@@ -140,10 +140,24 @@ func TestExtraerHorarioInvierno(t *testing.T) {
 
 	string stringHorario = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes - viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
 
-	horarioInvierno, err := extraerHorario(stringHorario)
+	horarioInvierno, err := extraerHorarioInvierno(stringHorario)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
-	g.Expect(horario).NotTo(gomega.BeNil())
+	g.Expect(horarioInvierno).NotTo(gomega.BeNil())
 	g.Expect(horarioInvierno).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos)"))
 }
+
+func TestExtraerHorarioDias(t *testing.T) {
+	g := gomega.NewWithT(t)
+
+	string dia = "Sábado"
+	string stringHorario = "10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos)"
+	horarioSabado, err := extraerHorarioDias(dia, stringHorario)
+	g.Expect(err).NotTo(gomega.HaveOccurred())
+	g.Expect(horarioSabado).NotTo(gomega.BeNil())
+	g.Expect(horarioSabado).To(gomega.Equal([]string{
+		"10:00 - 18:00",
+	}))
+
+}	
 
 
