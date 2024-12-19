@@ -46,6 +46,10 @@ func extraerNodosH3(doc *html.Node) ([]*html.Node, error) {
 
 	recorrerNodos(doc)
 
+	if len(nodosH3) == 0 {
+		return nil, fmt.Errorf("No se encontraron nodos <h3> con id 'nombre-monumento'")
+	}
+
 	return nodosH3, nil
 }
 
@@ -81,6 +85,10 @@ func extraerStringNodo(n *html.Node) string {
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		texto += extraerStringNodo(c)
 	}
-	return texto
+	return texto,
+}
+
+func extraerHorarioInvierno(s string) {
+
 }
 
