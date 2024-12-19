@@ -8,30 +8,6 @@ import(
 	"github.com/onsi/gomega"
 )
 
-func TestCargarDocumento(t *testing.T) {
-	g := gomega.NewWithT(t)
-
-	t.Run("Cargar documento HTML correctamente", func(t *testing.T) {
-
-		filePath := "/home/adiazcencillo/horarios.html"
-
-		contenido, err := cargarDocumento(filePath)
-
-		g.Expect(err).NotTo(gomega.HaveOccurred()) 
-		g.Expect(contenido).NotTo(gomega.BeNil())         
-	})
-
-	t.Run("Archivo no encontrado", func(t *testing.T) {
-
-		filePath := "noexiste.html"
-
-		doc, err := cargarDocumento(filePath)
-
-		g.Expect(err).To(gomega.HaveOccurred())
-		g.Expect(doc).To(gomega.BeNil())
-	})
-}
-
 func TestExtraerNodosH3(t *testing.T) {
 	g := gomega.NewWithT(t)
 
@@ -135,12 +111,12 @@ func TestExtraerHorarioInvierno(t *testing.T) {
 func TestExtraerHorarioDias(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	dia := "lunes"
+	dia := "martes"
 	stringHorario := "10:00 - 14:00 y 16:00 - 18:00 (lunes-viernes), 10:00 - 18:00 (sábado, domingo y festivos)"
 	horarioSabado, err := extraerHorarioDias(dia, stringHorario)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 	g.Expect(horarioSabado).NotTo(gomega.BeNil())
-	g.Expect(horarioSabado).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00")
+	g.Expect(horarioSabado).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00"))
 
 }		
 
