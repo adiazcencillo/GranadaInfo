@@ -3,7 +3,7 @@ package horario
 import(
 	"fmt"
 	"os"
-	"strings"
+	"regexp"
 
 	"golang.org/x/net/html"
 )
@@ -78,7 +78,7 @@ func extraerNodosHorarios(doc *html.Node) ([]*html.Node, error) {
 		return nil, fmt.Errorf("No se encontraron nodos <p> con id 'horario'")
 	}
 
-	return nodosH3, nil
+	return nodosHorario, nil
 }
 
 
@@ -111,8 +111,84 @@ func extraerHorarioInvierno(cadena string) (string, error) {
 	matches := re.FindStringSubmatch(cadena)
 
 	if len(matches) == 0 {
-		return "", errors.New("No se encontraron horarios de invierno en la cadena proporcionada")
+		return "", fmt.Errorf("No se encontraron horarios de invierno en la cadena proporcionada")
 	}
 
-	return matches[0], nil
+	return matches[2], nil
+}
+
+func extraerHorarioDias(dia string, cadena string) (string, error) {
+
+	re := regexp.MustCompile(fmt.Sprintf(`(\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))? \((.*?%s.*?)\)`, dia))
+	matches := re.FindStringSubmatch(cadena)
+
+	if len(matches) < 4 {
+		diaInicio, diaFin := extraerIntervaloDias(cadena)
+
+		if(diaInicio == "mismo horario") {
+			return cadena, nil
+		} else {
+			if(contenidoIntervaloDias(dia, diaInicio, diaFin)) {
+				horario := regexp.MustCompile(`(\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?`)
+				matches_horario := horario.FindStringSubmatch(cadena)
+
+				return matches_horario[0], nil
+			} else {
+				return "vacio", nil
+			}
+		}	
+
+	} else {
+		horario := regexp.MustCompile(`(\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?`)
+		matches_horario := horario.FindStringSubmatch(cadena)
+
+		return matches_horario[0], nil
+	}
+}
+
+
+func extraerIntervaloDias(cadena string) (string, string) {
+
+	re_dias := regexp.MustCompile(`\((.*?)-(.*?)\)`)
+	match := re_dias.FindStringSubmatch(cadena)
+
+	if len(match) == 2 {
+
+		diaInicio := match[1]
+		diaFin := match[2]
+
+		return diaInicio, diaFin
+	} else {
+		return "mismo horario", ""
+	}
+
+}
+
+func contenidoIntervaloDias(dia string, inicio string, fin string) (bool) {
+
+	diasSemana := map[string]int{
+		"lunes":    0,
+		"martes":   1,
+		"miércoles": 2,
+		"jueves":   3,
+		"viernes":  4,
+		"sábado":   5,
+		"domingo":  6,
+	}
+
+	numeroDia := diasSemana[dia]
+	numeroDiaInicio := diasSemana[inicio]
+	numerioDiaFin := diasSemana[fin]
+	
+	if(numeroDia < numeroDiaInicio || numeroDia > numerioDiaFin) {
+		return true
+	} else {
+		return false
+	}
+}
+
+func extraerHorario(cadena string) (*Horario, error) {
+	horario := NuevoHorario(nil, nil)
+
+	return horario, nil
 }
