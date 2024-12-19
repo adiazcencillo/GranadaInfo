@@ -82,16 +82,29 @@ func extraerNodosHorarios(doc *html.Node) ([]*html.Node, error) {
 }
 
 
-func extraerStringNodo(n *html.Node) string {
+func extraerStringNodo(n *html.Node) (string, error) {
+	if n == nil {
+		return "", fmt.Errorf("El nodo proporcionado es nil")
+	}
+
 	var texto string
 	if n.Type == html.TextNode {
 		texto = n.Data
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		texto += extraerStringNodo(c)
+		subTexto, err := extraerStringNodo(c)
+		if err != nil {
+			return "", err
+		}
+		texto += subTexto
 	}
-	return texto,
+
+	if texto == "" {
+		return "", fmt.Errorf("El nodo no contiene texto")
+	}
+	return texto, nil
 }
+
 
 func extraerHorarioInvierno(s string) {
 
