@@ -106,7 +106,13 @@ func extraerStringNodo(n *html.Node) (string, error) {
 }
 
 
-func extraerHorarioInvierno(s string) {
+func extraerHorarioInvierno(cadena string) (string, error) {
+	re := regexp.MustCompile(`(Invierno)?:?([^;]+);?`)
+	matches := re.FindStringSubmatch(cadena)
 
+	if len(matches) == 0 {
+		return "", errors.New("No se encontraron horarios de invierno en la cadena proporcionada")
+	}
+
+	return matches[0], nil
 }
-
