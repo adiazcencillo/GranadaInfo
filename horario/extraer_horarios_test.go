@@ -118,6 +118,19 @@ func TestExtraerHorarioDias(t *testing.T) {
 	g.Expect(horarioSabado).NotTo(gomega.BeNil())
 	g.Expect(horarioSabado).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00"))
 
-}		
+}
+
+func TestExtraerMonumentos(t *testing.T) {
+	g := gomega.NewWithT(t)
+
+	filePath := "../data/horarios.html"
+	doc, err := cargarDocumento(filePath)
+	g.Expect(err).NotTo(gomega.HaveOccurred())
+
+	monumentos, err := extraerMonumentos(doc)
+	g.Expect(err).NotTo(gomega.HaveOccurred())
+	g.Expect(monumentos).To(gomega.HaveLen(21))
+
+}
 
 
