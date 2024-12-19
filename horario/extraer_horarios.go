@@ -129,20 +129,31 @@ func extraerHorarioDias(dia string, cadena string) (string, error) {
 			return cadena, nil
 		} else {
 			if(contenidoIntervaloDias(dia, diaInicio, diaFin)) {
-				horario := regexp.MustCompile(`(\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?`)
+				horario := regexp.MustCompile(`((\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?) \((.*?)-(.*?)\)`)
 				matches_horario := horario.FindStringSubmatch(cadena)
-
-				return matches_horario[0], nil
+				
+				return matches_horario[1], nil
 			} else {
 				return "vacio", nil
 			}
 		}	
 
 	} else {
-		horario := regexp.MustCompile(`(\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?`)
-		matches_horario := horario.FindStringSubmatch(cadena)
 
-		return matches_horario[0], nil
+		horario_regex := regexp.MustCompile(fmt.Sprintf(`((\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?) \((.*?%s.*?)\),`, dia))
+		matches_horario := horario_regex.FindStringSubmatch(cadena)
+		horario := ""
+
+		if len(matches_horario) == 0 {
+			horario_regex = regexp.MustCompile(fmt.Sprintf(`, ((\d{2}:\d{2}) - (\d{2}:\d{2})(?: y (\d{2}:\d{2}) - (\d{2}:\d{2}))?) \((.*?%s.*?)\)`, dia))
+			matches_horario = horario_regex.FindStringSubmatch(cadena)
+
+			horario = matches_horario[1]
+		} else {
+			horario = matches_horario[1]
+		}
+
+		return horario, nil
 	}
 }
 
@@ -152,14 +163,17 @@ func extraerIntervaloDias(cadena string) (string, string) {
 	re_dias := regexp.MustCompile(`\((.*?)-(.*?)\)`)
 	match := re_dias.FindStringSubmatch(cadena)
 
-	if len(match) == 2 {
+	if len(match) == 0 {
+
+		return "mismo horario", ""
+
+	} else {
 
 		diaInicio := match[1]
 		diaFin := match[2]
 
 		return diaInicio, diaFin
-	} else {
-		return "mismo horario", ""
+
 	}
 
 }
@@ -179,8 +193,8 @@ func contenidoIntervaloDias(dia string, inicio string, fin string) (bool) {
 	numeroDia := diasSemana[dia]
 	numeroDiaInicio := diasSemana[inicio]
 	numerioDiaFin := diasSemana[fin]
-	
-	if(numeroDia < numeroDiaInicio || numeroDia > numerioDiaFin) {
+
+	if(numeroDia > numeroDiaInicio || numeroDia < numerioDiaFin) {
 		return true
 	} else {
 		return false
