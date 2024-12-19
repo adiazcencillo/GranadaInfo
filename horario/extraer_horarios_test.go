@@ -2,8 +2,7 @@ package horario
 
 import(
 	"testing"
-	"strings"
-
+	
 	"golang.org/x/net/html"
 
 	"github.com/onsi/gomega"
@@ -53,7 +52,7 @@ func TestExtraerNodosHorarios(t *testing.T) {
 	doc, err := cargarDocumento(filePath)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 
-	nodosHorario, err := extraerNodosHorario(doc)
+	nodosHorario, err := extraerNodosHorarios(doc)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 	g.Expect(nodosHorario).To(gomega.HaveLen(21))
 }	
@@ -65,8 +64,8 @@ func TestExtraerStringNodo(t *testing.T) {
 	doc, err := cargarDocumento(filePath)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 
-	nodosH3 := extraerNodosH3(doc)
-	nodosHorario := extraerNodosHorario(doc)
+	nodosH3, err := extraerNodosH3(doc)
+	nodosHorario, err := extraerNodosHorarios(doc)
 
 	t.Run("Extraer texto del primer nodo <h3>", func(t *testing.T) {
 		texto, err := extraerStringNodo(nodosH3[0])
@@ -77,7 +76,7 @@ func TestExtraerStringNodo(t *testing.T) {
 	t.Run("Extraer texto del primer nodo de horarios", func(t *testing.T) {
 		texto, err := extraerStringNodo(nodosHorario[0])
 		g.Expect(err).NotTo(gomega.HaveOccurred()) 
-		g.Expect(texto).To(gomega.Equal("08:30 - 18:00, 19:00 - 20:45 (invierno); 08:30 - 20:00, 22:00 - 23:30 (verano)"))
+		g.Expect(texto).To(gomega.Equal("Invierno: 08:30 - 18:00, 19:00 - 20:45 ; Verano: 08:30 - 20:00, 22:00 - 23:30"))
 	})
 
 	t.Run("Extraer texto de un nodo vacío", func(t *testing.T) {
@@ -92,7 +91,7 @@ func TestExtraerStringNodo(t *testing.T) {
 func TestExtraerHorario(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	var stringHorario = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes - viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
+	var stringHorario string = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes-viernes), 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes-viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
 
 	horario, err := extraerHorario(stringHorario)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
@@ -139,19 +138,19 @@ func TestExtraerHorario(t *testing.T) {
 func TestExtraerHorarioInvierno(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	var stringHorario = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes - viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
+	var stringHorario string = "Invierno: 10:00 - 14:00 y 16:00 - 18:00 (lunes-viernes), 10:00 - 18:00 (sábado, domingo y festivos); Verano: 10:00 - 14:00 y 18:00 - 20:00 (lunes-viernes); 10:00 - 20:00 (sábado, domingo y festivos)"
 
 	horarioInvierno, err := extraerHorarioInvierno(stringHorario)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 	g.Expect(horarioInvierno).NotTo(gomega.BeNil())
-	g.Expect(horarioInvierno).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos)"))
+	g.Expect(horarioInvierno).To(gomega.Equal("10:00 - 14:00 y 16:00 - 18:00 (lunes-viernes), 10:00 - 18:00 (sábado, domingo y festivos)"))
 }
 
 func TestExtraerHorarioDias(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	var dia = "Sábado"
-	var stringHorario = "10:00 - 14:00 y 16:00 - 18:00 (lunes - viernes); 10:00 - 18:00 (sábado, domingo y festivos)"
+	var dia string = "Sábado"
+	var stringHorario string = "10:00 - 14:00 y 16:00 - 18:00 (lunes-viernes), 10:00 - 18:00 (sábado, domingo y festivos)"
 	horarioSabado, err := extraerHorarioDias(dia, stringHorario)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 	g.Expect(horarioSabado).NotTo(gomega.BeNil())
