@@ -1,7 +1,9 @@
 lenguaje: Go
 
-entidad: pkg/horario/monumento.go
+entidad: horario/monumento.go
 
 automatizar:
   fichero: Taskfile.yaml
   orden: task
+
+test: horario/extraer_horarios_test.go  
