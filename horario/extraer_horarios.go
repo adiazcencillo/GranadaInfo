@@ -83,25 +83,27 @@ func extraerNodosHorarios(doc *html.Node) ([]*html.Node, error) {
 
 
 func extraerStringNodo(n *html.Node) (string, error) {
+
 	if n == nil {
 		return "", fmt.Errorf("El nodo proporcionado es nil")
 	}
-
 	var texto string
-	if n.Type == html.TextNode {
-		texto = n.Data
-	}
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		subTexto, err := extraerStringNodo(c)
-		if err != nil {
-			return "", err
+
+	var extraerTexto func(*html.Node)
+	extraerTexto = func(n *html.Node) {
+		if n.Type == html.TextNode {
+			texto += n.Data
 		}
-		texto += subTexto
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			extraerTexto(c)
+		}
 	}
+	extraerTexto(n)
 
 	if texto == "" {
 		return "", fmt.Errorf("El nodo no contiene texto")
 	}
+
 	return texto, nil
 }
 
