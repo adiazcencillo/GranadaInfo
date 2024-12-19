@@ -29,6 +29,10 @@ Como _test runner_ se ha decidido usar `go test` para cumplir con los estándare
 
 Si queremos comprobar la sintaxis del código desarrollado hasta el momento basta con ejecutar el comando task check.
 
+## Ejecución de tests: orden test
+
+Para ejecutar los tests mediantes nuestro gestor de tareas basta con ejecutar task test.
+
 ## Documentos
 
 [Historias de usuario](docs/user-stories.md)
