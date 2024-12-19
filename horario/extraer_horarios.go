@@ -261,3 +261,43 @@ func extraerHorario(cadena string) (*Horario, error) {
 	horario := NuevoHorario(cerrado, horarios)
 	return horario, err
 }
+
+func extraerMonumentos(n *html.Node) ([]*Monumento, error) {
+
+	nodosHorarios, err := extraerNodosHorarios(n)
+	nodosH3, err := extraerNodosH3(n)
+	if err != nil {
+		return nil, fmt.Errorf("Error al extraer los nodos")
+	}
+
+	if len(nodosHorarios) != len(nodosH3) {
+		return nil, fmt.Errorf("El número de nodos de horarios y títulos no coincide")
+	}
+
+	var monumentos []*Monumento
+
+	
+
+	for i:=0; i<len(nodosH3); i++ {
+		nombreMonumento, err:= extraerStringNodo(nodosH3[i])
+
+		if err != nil {
+			return nil, fmt.Errorf("Error al extraer el nombre del monumento en índice %d: %v", i, err)
+		}
+
+		horarioTexto, err := extraerStringNodo(nodosHorarios[i])
+		if err != nil {
+			return nil, fmt.Errorf("error al extraer el horario en índice %d: %v", i, err)
+		}
+
+		horario, err := extraerHorario(horarioTexto)
+		if err != nil {
+			return nil, fmt.Errorf("error al analizar el horario en índice %d: %v", i, err)
+		}
+
+		monumento := NuevoMonumento(nombreMonumento, *horario)
+		monumentos = append(monumentos, monumento)
+	}
+
+	return monumentos, nil
+}
