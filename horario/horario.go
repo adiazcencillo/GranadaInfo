@@ -5,7 +5,7 @@ type Horario struct {
     HorariosApertura map[ClaveHorario]string
 }
 
-func NuevoHorario(diasCerrado []bool, horariosApertura map[ClaveHorario][]string) *Horario {
+func NuevoHorario(diasCerrado []bool, horariosApertura map[ClaveHorario]string) *Horario {
     return &Horario{
         DiasCerrado:      diasCerrado,
         HorariosApertura: horariosApertura,
