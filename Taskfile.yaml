@@ -12,3 +12,7 @@ tasks:
     cmds:
       - "go build ./pkg/horario"
 
+  test:
+    desc: "Ejecutar tests"
+    cmds: 
+      - "go test ./horario -v"
