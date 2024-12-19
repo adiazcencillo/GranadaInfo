@@ -11,7 +11,7 @@ import(
 func TestExtraerNodosH3(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	filePath := "/home/adiazcencillo/horarios.html"
+	filePath := "../data/horarios.html"
 	doc, err := cargarDocumento(filePath)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -24,7 +24,7 @@ func TestExtraerNodosH3(t *testing.T) {
 func TestExtraerNodosHorarios(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	filePath := "/home/adiazcencillo/horarios.html"
+	filePath := "../data/horarios.html"
 	doc, err := cargarDocumento(filePath)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -36,7 +36,7 @@ func TestExtraerNodosHorarios(t *testing.T) {
 func TestExtraerStringNodo(t *testing.T) {
 	g := gomega.NewWithT(t)
 
-	filePath := "/home/adiazcencillo/horarios.html"
+	filePath := "../data/horarios.html"
 	doc, err := cargarDocumento(filePath)
 	g.Expect(err).NotTo(gomega.HaveOccurred())
 
