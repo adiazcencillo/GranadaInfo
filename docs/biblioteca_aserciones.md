@@ -22,7 +22,7 @@ Recalcar que `Go` no maneja de forma nativa aserciones ya que realiza un manejo 
 
 
 ### **Testing**
-Es la biblioteca de aserciones por defecto en `Go`. Se apoya en los métodos `t.Error`y `t.Fatalf` para generar las "aserciones" en los tests. Esto limita la capacidad de por ejemplo personalizar los mensajes de las aserciones, ya que sigue un enfoque distinto.
+Es el framework de pruebas en `Go`. Si bien no soporta el uso de aserciones (ya que como se indica más arriba `Go` no soporta estas expresiones), se apoya en los métodos `t.Error`y `t.Fatalf` para generar los tests y reportar los errores. Esto limita la capacidad de por ejemplo personalizar los mensajes de las aserciones, ya que sigue un enfoque distinto.
 
 ### **`Testify`**
 Biblioteca que proporciona aserciones expresivas como `Equal`, `Contains`, y `Error`. Esto añade una capa de abstracción sobre los métodos `t.Error` y `t.Fatalf` de `Testing`, proporcionando una sintaxis más clara, alineada con las llamadas aserciones funcionales. 
