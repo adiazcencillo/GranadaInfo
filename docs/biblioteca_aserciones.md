@@ -6,7 +6,7 @@ Tal y como se indica en [#23](https://github.com/adiazcencillo/GranadaInfo/issue
 
 - **Soporte y comunidad activa**, asegurando ausencia de deuda técnica en el medio plazo.
 
-En cuanto a requisitos particulares para la biblioteca de aserciones, destacamos lss siguientes:
+En cuanto a requisitos particulares para la biblioteca de aserciones, destacamos las siguientes:
 
 ### **Capacidades avanzadas de aserción**
 Queremos contar con una herramienta de aserciones que nos permita escribir tests legibles y detallados. Será importante contar con:
