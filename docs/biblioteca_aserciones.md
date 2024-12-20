@@ -2,7 +2,7 @@
 
 ## Características Objetivas Deseadas
 
-Tal y como se indica en [#23](https://github.com/adiazcencillo/GranadaInfo/issues/23), será importante que la biliobteca elegida cumpla las siguientes consideraciones generales:
+Tal y como se indica en [#23](https://github.com/adiazcencillo/GranadaInfo/issues/23), será importante que la bilioteca elegida cumpla las siguientes consideraciones generales:
 
 - **Soporte y comunidad activa**, asegurando ausencia de deuda técnica en el medio plazo.
 - **Cumplir con los estándares y mejores prácticas del lenguaje**.
