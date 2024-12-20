@@ -22,7 +22,7 @@ Como gestor de dependencias se ha optado por usar `Go modules`, el estándar rec
 Se ha optado por el uso de `gomega` como biblioteca de aserciones debido a su enfoque _BDD_. Se puede consultar la decisión técnica en [Biblioteca de aserciones](docs/biblioteca_aserciones.md).
 
 ## Test runner
-Como _test runner_ se ha decidido usar `go test` para cumplir con los estándares del lenguaje. Más información en [Test runner](docs/test_runner.md)
+Como _test runner_ se ha decidido usar `Testing` para cumplir con los estándares del lenguaje. Más información en [Test runner](docs/test_runner.md)
 
 
 ## Comprobación de Sintaxis: orden check
