@@ -18,9 +18,20 @@ Como gestor de tareas se ha decidido usar la herramienta `Task`. Mediante el arc
 ## Gestor de Dependencias
 Como gestor de dependencias se ha optado por usar `Go modules`, el estándar recomendado por `Go`. De esta forma, en el fichero `go.mod` podremos especificar las dependencias necesarias para el correcto desarrollo del proyecto. Esta herramienta se ha elegido a partir de unos criterior objetivos especificados en [Gestor de Dependencias](docs/gestor_dependencias.md).
 
+## Biblioteca de aserciones
+Se ha optado por el uso de `gomega` como biblioteca de aserciones debido a su enfoque _BDD_. Se puede consultar la decisión técnica en [Biblioteca de aserciones](docs/biblioteca_aserciones.md).
+
+## Test runner
+Como _test runner_ se ha decidido usar `Testing` para cumplir con los estándares del lenguaje. Más información en [Test runner](docs/test_runner.md)
+
+
 ## Comprobación de Sintaxis: orden check
 
 Si queremos comprobar la sintaxis del código desarrollado hasta el momento basta con ejecutar el comando task check.
+
+## Ejecución de tests: orden test
+
+Para ejecutar los tests mediantes nuestro gestor de tareas basta con ejecutar task test.
 
 ## Documentos
 
@@ -33,3 +44,7 @@ Si queremos comprobar la sintaxis del código desarrollado hasta el momento bast
 [Gestor de Dependencias](docs/gestor_dependencias.md)
 
 [Gestor de Tareas](docs/gestor_tareas.md)
+
+[Bibilioteca de aserciones](docs/biblioteca_aserciones.md)
+
+[Test runner](docs/test_runner.md)
