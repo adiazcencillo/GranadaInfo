@@ -3,12 +3,11 @@ package horario
 type ClaveHorario string
 
 const (
-    Lunes     ClaveHorario = "lunes"
-    Martes    ClaveHorario = "martes"
-    Miércoles ClaveHorario = "miércoles"
-    Jueves    ClaveHorario = "jueves"
-    Viernes   ClaveHorario = "viernes"
-    Sábado    ClaveHorario = "sábado"
-    Domingo   ClaveHorario = "domingo"
-    Festivo   ClaveHorario = "festivo"
+    lunes     ClaveHorario = "lunes"
+    martes    ClaveHorario = "martes"
+    miércoles ClaveHorario = "miércoles"
+    jueves    ClaveHorario = "jueves"
+    viernes   ClaveHorario = "viernes"
+    sábado    ClaveHorario = "sábado"
+    domingo   ClaveHorario = "domingo"
 )
