@@ -77,13 +77,13 @@ func TestExtraerHorario(t *testing.T) {
 		g.Expect(horario.HorariosApertura[ClaveHorario(dia)]).To(gomega.Equal(valorEsperado))
 	}
 
-	verifyHorario("Lunes", "10:00 - 14:00 y 16:00 - 18:00")
-	verifyHorario("Martes", "10:00 - 14:00 y 16:00 - 18:00")
-	verifyHorario("Miércoles", "10:00 - 14:00 y 16:00 - 18:00")
-	verifyHorario("Jueves", "10:00 - 14:00 y 16:00 - 18:00")
-	verifyHorario("Viernes", "10:00 - 14:00 y 16:00 - 18:00")
-	verifyHorario("Sábado", "10:00 - 18:00")
-	verifyHorario("Domingo", "10:00 - 18:00")
+	verifyHorario("lunes", "10:00 - 14:00 y 16:00 - 18:00")
+	verifyHorario("martes", "10:00 - 14:00 y 16:00 - 18:00")
+	verifyHorario("miércoles", "10:00 - 14:00 y 16:00 - 18:00")
+	verifyHorario("jueves", "10:00 - 14:00 y 16:00 - 18:00")
+	verifyHorario("viernes", "10:00 - 14:00 y 16:00 - 18:00")
+	verifyHorario("sábado", "10:00 - 18:00")
+	verifyHorario("domingo", "10:00 - 18:00")
 
 	g.Expect(horario.DiasCerrado).To(gomega.Equal([]bool{false, false, false, false, false, false, false}))
 }
