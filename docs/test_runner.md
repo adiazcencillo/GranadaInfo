@@ -13,7 +13,7 @@ En cuanto a requisitos particulares para el _test runner_, destacamos los siguie
 Para nuestro cometido será recomendable que el _test runner_ elegido nos permita generar subtests para poder rastrear mejor los errores en el código.
 
 ### **Limitar el número de dependencias**
-Será recomendable contar con un _test runner_ que reduzca el número de dependencias de nuestro proyecto.
+Será recomendable contar con un _test runner_ que no aumente el número de dependencias de nuestro proyecto.
 
 ---
 
