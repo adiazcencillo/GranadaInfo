@@ -205,58 +205,24 @@ func contenidoIntervaloDias(dia string, inicio string, fin string) (bool) {
 
 func extraerHorario(cadena string) (*Horario, error) {
 
+	diasSemana := []string{"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"}
 	horarios := make(map[ClaveHorario]string)
-	cerrado := make([]bool, 7)
+	cerrado := make([]bool, len(diasSemana))
 
-	lunes, err := extraerHorarioDias("lunes", cadena)
-	if(lunes == "vacio") {
-		cerrado[0] = true
-	} else {
-		horarios[ClaveHorario("Lunes")] = lunes
+	var err error
+	for i, dia := range diasSemana {
+		horarioDia, errDia := extraerHorarioDias(dia, cadena)
+		if errDia != nil {
+			err = errDia
+		}
+
+		if horarioDia == "vacio" {
+			cerrado[i] = true
+		} else {
+			horarios[ClaveHorario(dia)] = horarioDia
+		}
+
 	}
-
-	martes, err := extraerHorarioDias("martes", cadena)
-	if(lunes == "vacio") {
-		cerrado[1] = true
-	} else {
-		horarios[ClaveHorario("Martes")] = martes
-	}
-
-	miercoles, err := extraerHorarioDias("miércoles", cadena)
-	if(miercoles == "vacio") {
-		cerrado[2] = true
-	} else {
-		horarios[ClaveHorario("Miércoles")] = miercoles
-	}
-
-	jueves, err := extraerHorarioDias("jueves", cadena)
-	if(jueves == "vacio") {
-		cerrado[3] = true
-	} else {
-		horarios[ClaveHorario("Jueves")] = jueves
-	}
-
-	viernes, err := extraerHorarioDias("viernes", cadena)
-	if(lunes == "vacio") {
-		cerrado[4] = true
-	} else {
-		horarios[ClaveHorario("Viernes")] = viernes
-	}
-
-	sabado, err := extraerHorarioDias("sábado", cadena)
-	if(sabado == "vacio") {
-		cerrado[5] = true
-	} else {
-		horarios[ClaveHorario("Sábado")] = sabado
-	}
-
-	domingo, err := extraerHorarioDias("doming", cadena)
-	if(lunes == "vacio") {
-		cerrado[6] = true
-	} else {
-		horarios[ClaveHorario("Domingo")] = domingo
-	}
-
 
 	horario := NuevoHorario(cerrado, horarios)
 	return horario, err
